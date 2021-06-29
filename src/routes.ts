@@ -40,6 +40,13 @@ const listUserController = new ListUserController();
 /**
  * @swagger
  * tags:
+ *      name: Auth
+ *      description: Auth API
+ */
+
+/**
+ * @swagger
+ * tags:
  *      name: Tags
  *      description: API To manage tags
  */
@@ -91,6 +98,8 @@ const listUserController = new ListUserController();
  *                                  admin: true
  *                                  created_at: 2021-06-28T23:59:07.000Z
  *                                  updated_at: 2021-06-28T23:59:07.000Z
+ *          "401":
+ *              description: You need an access token
  *   post:
  *      summary: Creates a new user
  *      tags: [Users]
@@ -139,6 +148,42 @@ router.post("/users", createUserController.handle);
 router.get("/users/compliments/send", ensureAuthenticated, listUserSendComplimentsController.handle)
 router.get("/users/compliments/receive", ensureAuthenticated, listUserReceiveComplimentsService.handle)
 
+
+/** 
+ * @swagger
+ * 
+ * /login:
+ *   post:
+ *      tags: [Auth]
+ *      summary: Authenticate a user
+ *      consumes:
+ *          - application/json
+ *      produces:
+ *          - application/json
+ *      requestBody:
+ *            description: Auth
+ *            required: true
+ *            content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      required:
+ *                          - email
+ *                          - password
+ *                      properties:
+ *                          email:
+ *                              type: string
+ *                          password:
+ *                              type: string
+ *                  example: 
+ *                      email: tester@email.com
+ *                      password: testerpassword
+ *      responses: 
+ *          "200": 
+ *              description: Return token
+ *          "400":
+ *              description: Field(s) invalid   
+*/
 router.post("/login", authenticateUserController.handle);
 
 
