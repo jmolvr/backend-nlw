@@ -194,6 +194,93 @@ router.post("/tags", ensureAuthenticated, ensureAdmin, createTagController.handl
 router.post("/compliments", ensureAuthenticated, createComplimentController.handle);
 
 
+/** 
+ * @swagger
+ * 
+ * /tags:
+ *   get:
+ *      summary: A list of tags
+ *      tags: [Tags]
+ *      produces:
+ *          - application/json
+ *      responses:
+ *          "200":
+ *              description: A list of tags
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: array
+ *                          items:
+ *                              type: object
+ *                              properties:
+ *                                  id:
+ *                                      type: string
+ *                                  name: 
+ *                                      type: string
+ *                                  created_at:
+ *                                      type: string
+ *                                  updated_at:
+ *                                      type: string
+ *                                  nameCustom:
+ *                                      type: string
+ *                              example: 
+ *                                  id: "11b24b6c-17b2-417d-ad04-04309214a1ff"
+ *                                  name: inspiração
+ *                                  created_at: 2021-06-28T23:59:07.000Z
+ *                                  updated_at: 2021-06-28T23:59:07.000Z
+ *                                  nameCustom: "#inspiracao"
+ *          "401":
+ *              description: You need an access token
+ *   post:
+ *      summary: Creates a new tag
+ *      tags: [Tags]
+ *      security: 
+ *        - bearerAuth: []
+ *      consumes:
+ *          - application/json
+ *      produces:
+ *          - application/json
+ *      requestBody:
+ *            description: The tag to create
+ *            required: true
+ *            content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      required:
+ *                          - name
+ *                      properties:
+ *                          name:
+ *                            type: string
+ *                  example: 
+ *                      name: inspiração
+ *      responses: 
+ *          "200": 
+ *              description: The tag created
+ *              content:
+ *                application/json:
+ *                  schema:
+ *                    type: object
+ *                    properties:
+ *                      id:
+ *                        type: string
+ *                      name: 
+ *                        type: string
+ *                      created_at:
+ *                        type: string
+ *                      update_at:
+ *                        type: string
+ *                    example:
+ *                      id: cc95d378-e14e-43d4-a139-5435494b34c1
+ *                      name: inspiração
+ *                      created_at: 2021-06-29T01:30:53.000Z
+ *                      updated_at: 2021-06-29T01:30:53.000Z
+ *          "400":
+ *              description: Tag already exists!
+ *          "401":
+ *              description: You need an access token
+*/
+
 router.get("/tags", listTagsController.handle);
 
 
