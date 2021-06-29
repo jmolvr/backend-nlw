@@ -2,6 +2,37 @@ import { Entity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn } fro
 import { v4 as uuid} from "uuid";
 import { Exclude } from "class-transformer";
 
+
+
+/**
+ * @swagger
+ *  components:
+ *    schemas: 
+ *      User:
+ *        type: object
+ *        required:
+ *          - name
+ *          - email
+ *          - password
+ *        properties:
+ *          id: 
+ *            type: string
+ *            description: The auto-generated id of the user
+ *          name:
+ *            type: string
+ *            description: The name of user
+ *          password:
+ *            type: string
+ *            description: The user's password
+ *          created_at:
+ *            type: string
+ *            description: The date when user was created
+ *        example:
+ *            name: tester
+ *            email: teste@email.com
+ *            password: passwordnotsecure
+ *                  
+ */
 @Entity('users')
 export class User {
     @PrimaryColumn()
